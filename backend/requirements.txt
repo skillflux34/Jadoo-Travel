@@ -1,0 +1,10 @@
+fastapi
+uvicorn[standard]
+tortoise-orm
+asyncpg
+aerich
+pydantic
+python-dotenv
+python-jose[cryptography]
+email-validator
+bcrypt
