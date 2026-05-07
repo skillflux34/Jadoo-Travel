@@ -19,10 +19,16 @@ const Login = () => {
     try {
       const response = await api.post('/login', formData);
 
-      login(response.data.access_token, response.data.username);
+      const { access_token, username, role } = response.data;
+
+      login(access_token, username, role);
       toast.success("Login Successful");
 
-      navigate('/');
+      if (role === "admin") {
+        navigate("/admin-dashboard")
+      } else {
+        navigate('/');
+      }
 
     } catch (err) {
       toast.error("Invalid Credentials");

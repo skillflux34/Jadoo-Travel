@@ -56,20 +56,20 @@ const Header = () => {
                 <li className='cursor-pointer hover:text-[#DF6951] transition-colors'>Desitinations</li>
                 <li className='cursor-pointer hover:text-[#DF6951] transition-colors'>Hotels</li>
                 <li className='cursor-pointer hover:text-[#DF6951] transition-colors'>Flights</li>
-                <li className='cursor-pointer hover:text-[#DF6951] transition-colors'>Bookings</li>
+                <li onClick={() => navigate("/bookings")} className='cursor-pointer hover:text-[#DF6951] transition-colors'>Bookings</li>
                 
                 {!user ? (
                     <>
                     <li onClick={() => navigate("/login")} className="cursor-pointer">Login</li>
                     <li>
-                        <button onClick={() => navigate("/signup")} className="...">Sign up</button>
+                        <button onClick={() => navigate("/signup")} className="cursor-pointer">Sign up</button>
                     </li>
                     </>
                 ) : (
                     <div className="flex items-center gap-4">
                     <span className="text-sm font-bold text-[#DF6951]">Hi, {user.username}</span>
                     <li>
-                        <button onClick={handleLogout} className="bg-[#DF6951] text-white px-5 py-2 rounded-md">
+                        <button onClick={handleLogout} className="bg-[#DF6951] text-white px-5 py-2 rounded-md cursor-pointer hover:shadow-lg">
                         Logout
                         </button>
                     </li>
@@ -77,7 +77,7 @@ const Header = () => {
                 )}
 
                 {user?.role === 'admin' && (
-                    <li onClick={() => navigate("/admin/dashboard")} className="text-red-500 font-bold cursor-pointer">
+                    <li onClick={() => navigate("/admin-dashboard")} className="text-red-500 font-bold cursor-pointer">
                         Admin Panel
                     </li>
                 )}

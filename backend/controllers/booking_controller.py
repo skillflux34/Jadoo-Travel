@@ -23,6 +23,7 @@ async def get_user_bookings(user_id: int):
     return [
         {
             "id": b.id,
+            "trip_id": b.trip.id,
             "trip_name": b.trip.title,
             "status": b.status,
             "booked_at": b.created_at

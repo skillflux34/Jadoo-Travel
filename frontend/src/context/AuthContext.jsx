@@ -9,8 +9,9 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const token = localStorage.getItem('token');
     const storedUser = localStorage.getItem('username');
+    const storedRole = localStorage.getItem('role');
     if (token) {
-      setUser({ token, username: storedUser });
+      setUser({ token, username: storedUser, role: storedRole });
     }
     setLoading(false);
   }, []);
@@ -25,6 +26,7 @@ export const AuthProvider = ({ children }) => {
   const logout = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('username');
+    localStorage.removeItem('role')
     setUser(null);
   };
 

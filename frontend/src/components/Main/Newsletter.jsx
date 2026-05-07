@@ -30,15 +30,6 @@ const Newsletter = () => {
           </button>
         </div>
       </div>
-
-
-      <div className='absolute bottom-0 -left-36 z-0 pointer-events-none opacity-40 md:opacity-100'>
-        <img src="/left-bg.png" alt="" className='h-32 md:h-60 hidden md:block w-[570px]' />
-      </div>
-
-      <div className='absolute top-0 right-0 z-0 pointer-events-none opacity-40 md:opacity-100'>
-        <img src="/right-bg.png" alt="" className='h-32 md:h-60 hidden md:block w-70' />
-      </div>
       
       <div className='absolute -top-6 -right-6 bg-gradient-to-tr from-[#5E3BE1] to-[#7352EB] p-4 rounded-full text-white shadow-xl hidden md:block'>
          <RiTelegram2Fill className='size-6 rotate-12' />

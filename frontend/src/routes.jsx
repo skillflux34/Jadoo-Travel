@@ -4,6 +4,8 @@ import Hero from './components/Main/Hero';
 import Signup from './components/Auth/Signup';
 import Login from './components/Auth/Login';
 import OTPVerify from './components/Auth/OTPVerify';
+import AdminDashboard from './components/Admin/AdminDashboard';
+import BookingsPage from './components/Bookings/BookingsPage';
 
 const routes = [
   {
@@ -26,6 +28,14 @@ const routes = [
   {
     path: '/verify-otp',
     element: <OTPVerify />
+  },
+  {
+    path: '/admin-dashboard',
+    element: <AdminDashboard />
+  },
+  {
+    path: '/bookings',
+    element: <BookingsPage />
   },
   {
     path: '*',
