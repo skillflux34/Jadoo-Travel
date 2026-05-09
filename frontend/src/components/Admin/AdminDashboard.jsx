@@ -35,15 +35,15 @@ const AdminDashboard = () => {
   };
 
   if (loading) {
-      return (
-        <div className="min-h-screen bg-[#FFF9F1] flex items-center justify-center">
-          <Loader />
-        </div>
-      )
-    };
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <Loader />
+      </div>
+    )
+  };
 
   return (
-    <div className="min-h-screen bg-[#FFF9F1] p-8">
+    <div className="min-h-screen p-8">
       <div className="max-w-6xl mx-auto">
         <div className="flex justify-between items-center mb-8">
           <h1 className="text-3xl font-bold text-[#181E4B]">Admin Booking Management</h1>

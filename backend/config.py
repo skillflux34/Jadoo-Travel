@@ -14,6 +14,7 @@ TORTOISE_ORM = {
                 "models.user_model",
                 "models.trip_model",
                 "models.booking_model",
+                "models.destination_model",
                 "aerich.models"
             ],
             "default_connection": "default"

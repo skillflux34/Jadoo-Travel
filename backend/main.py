@@ -1,19 +1,21 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException, Depends
 from fastapi.middleware.cors import CORSMiddleware
+from jose import JWTError, jwt
 
 from tortoise.contrib.fastapi import register_tortoise
 from config import TORTOISE_ORM
 from utils.dependencies import check_admin, get_current_user
+from utils.jwt import SECRET_KEY, ALGORITHM, create_access_token
 
 from schemas.user_schema import UserSignUp, UserLogin, VerifyOTP
 from schemas.trip_schema import TripCreateSchema
 from schemas.booking_schema import BookingStatusUpdate, CreateBookingSchema
+from schemas.destination_schema import DestinationSchema
 
 from controllers.auth_controller import signup, login, verify_otp
 from controllers.trip_controller import create_trip, get_all_trips,update_trip, delete_trip
 from controllers.booking_controller import get_all_bookings, update_booking_status, create_new_booking, get_user_bookings
-
-from fastapi import Depends
+from controllers.destination_controller import add_featured_card, get_featured_cards, update_featured_card, delete_featured_card
 
 
 app = FastAPI(title="Jadoo Travels")
@@ -74,6 +76,39 @@ async def view_bookings():
 @app.patch("/admin/bookings/{booking_id}/status", dependencies=[Depends(check_admin)])
 async def change_status(booking_id: int, data: BookingStatusUpdate):
     return await update_booking_status(booking_id, data.status)
+
+@app.post("/featured-destinations", dependencies=[Depends(check_admin)])
+async def create_featured_destinations(data: DestinationSchema):
+    return await add_featured_card(data)
+
+@app.get("/featured-destinations")
+async def get_featured_destinations():
+    return await get_featured_cards()
+
+@app.put("/featured-destinations/{card_id}", dependencies=[Depends(check_admin)])
+async def edit_featured_card(card_id: int, data: DestinationSchema):
+    return await update_featured_card(card_id, data)
+
+@app.delete("/featured-destinations/{card_id}", dependencies=[Depends(check_admin)])
+async def remove_featured_card(card_id: int):
+    return await delete_featured_card(card_id)
+
+
+@app.post("/refresh-token")
+async def refresh_access_token(refresh_token: str):
+    try:
+        payload = jwt.decode(refresh_token, SECRET_KEY, algorithms=[ALGORITHM])
+
+        if payload.get("type") != "refresh":
+            raise HTTPException(status_code=401, detail="Invalid token type")
+        
+        new_payload = {"sub": payload.get("sub"), "role": payload.get("role")}
+        new_access_token = create_access_token(new_payload)
+
+        return {"access_token": new_access_token, "token-type": "bearer"}
+    
+    except JWTError:
+        raise HTTPException(status_code=401, detail="Refresh token expired or invalid")
 
 
 register_tortoise(

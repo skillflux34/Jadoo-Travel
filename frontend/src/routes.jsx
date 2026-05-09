@@ -6,6 +6,8 @@ import Login from './components/Auth/Login';
 import OTPVerify from './components/Auth/OTPVerify';
 import AdminDashboard from './components/Admin/AdminDashboard';
 import BookingsPage from './components/Bookings/BookingsPage';
+import AdminTripsPage from './components/Admin/AdminTripsPage';
+import Destination from './components/Destinations/Destination';
 
 const routes = [
   {
@@ -36,6 +38,14 @@ const routes = [
   {
     path: '/bookings',
     element: <BookingsPage />
+  },
+  {
+    path: '/trips',
+    element: <AdminTripsPage />
+  },
+  {
+    path: '/destination',
+    element: <Destination />
   },
   {
     path: '*',

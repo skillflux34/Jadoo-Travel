@@ -1,7 +1,11 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom';
+
 import { FaPlay } from "react-icons/fa";
 
 const Hero = () => {
+  const navigate = useNavigate();
+
   return (
     <div className='w-[90%] md:w-[80%] mx-auto mt-6 md:mt-12'>
       <div className='flex flex-col lg:flex-row items-center justify-between'>
@@ -25,7 +29,7 @@ const Hero = () => {
           </p>
 
           <div className='flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-6 md:gap-10 pt-4 w-full'>
-            <button className='bg-[#F1A501] px-7 py-4 rounded-xl text-white font-medium hover:shadow-xl transition-all shadow-md sm:w-max cursor-pointer'>
+            <button onClick={() => navigate("/destination")} className='bg-[#F1A501] px-7 py-4 rounded-xl text-white font-medium hover:shadow-xl transition-all shadow-md sm:w-max cursor-pointer'>
               Find out more
             </button>
 

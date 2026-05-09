@@ -11,9 +11,11 @@ async def create_trip(data):
             end_date = data.end_date,
             image_url = data.image_url
         )
-        return {"message": "Trip created successfully",
-                "title": data.title, "destination": data.destination
-            }
+        return {
+            "message": "Trip created successfully",
+            "title": data.title, 
+            "destination": data.destination
+        }
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 

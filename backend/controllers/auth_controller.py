@@ -1,6 +1,6 @@
 from models.user_model import User
 from utils.hash import hash_password, verify_password
-from utils.jwt import create_token
+from utils.jwt import create_access_token, create_refresh_token
 from utils.email import send_otp_email
 from utils.otp import generate_otp, otp_expiry_time
 from datetime import datetime, timezone
@@ -39,15 +39,17 @@ async def login(data):
 
     if not verify_password(data.password, user.password):
         raise HTTPException(status_code=401, detail="Invalid Credentials")
+    
+    payload = { "sub": user.email, "role": user.role, "user_id": user.id }
 
-    token = create_token({ 
-        "user_id": user.id,
-        "role": user.role 
-    })
+    access_token = create_access_token(payload)
+    refresh_token = create_refresh_token(payload)
 
     return {
         "message": "User logged in successfully",
-        "access_token": token,
+        "access_token": access_token,
+        "refresh_token": refresh_token,
+        "token_type": "bearer",
         "user_id": user.id,
         "role": user.role,
         "username": user.username

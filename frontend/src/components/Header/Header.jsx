@@ -53,7 +53,7 @@ const Header = () => {
                 h-full lg:h-auto
                 text-[#181E4B] text-lg lg:text-base
             '>
-                <li className='cursor-pointer hover:text-[#DF6951] transition-colors'>Desitinations</li>
+                <li onClick={() => navigate("/destination")} className='cursor-pointer hover:text-[#DF6951] transition-colors'>Destinations</li>
                 <li className='cursor-pointer hover:text-[#DF6951] transition-colors'>Hotels</li>
                 <li className='cursor-pointer hover:text-[#DF6951] transition-colors'>Flights</li>
                 <li onClick={() => navigate("/bookings")} className='cursor-pointer hover:text-[#DF6951] transition-colors'>Bookings</li>
@@ -79,6 +79,11 @@ const Header = () => {
                 {user?.role === 'admin' && (
                     <li onClick={() => navigate("/admin-dashboard")} className="text-red-500 font-bold cursor-pointer">
                         Admin Panel
+                    </li>
+                )}
+                {user?.role === 'admin' && (
+                    <li onClick={() => navigate("/trips")} className="text-red-500 font-bold cursor-pointer">
+                        Trips
                     </li>
                 )}
                 
